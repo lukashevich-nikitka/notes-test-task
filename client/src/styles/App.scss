@@ -1,0 +1,29 @@
+@import './mixins.scss';
+
+* {
+    @include default-settings;
+}
+
+.header-container {
+    @include default-wrapper-settings;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    h1, h3 {
+        font-family: 'Roboto', sans-serif;
+        text-align: center;
+    }
+}
+
+.footer-container {
+    @include default-wrapper-settings;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 3vw;
+    h1 {
+        font-family: 'Roboto', sans-serif;
+        text-align: center;
+    }
+}

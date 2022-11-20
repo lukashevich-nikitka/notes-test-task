@@ -1,0 +1,12 @@
+@mixin default-settings {    
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+}
+
+@mixin  default-wrapper-settings { 
+        font-family: 'Roboto', sans-serif;
+        width: 50vw;
+        height: fit-content;
+        margin: 5vw auto;
+}

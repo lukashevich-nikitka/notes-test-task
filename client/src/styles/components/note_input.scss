@@ -1,0 +1,9 @@
+@import '../mixins.scss';
+
+* {
+    @include default-settings;
+}
+
+.input-wrapper {
+    @include default-wrapper-settings;
+}

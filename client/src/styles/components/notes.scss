@@ -1,0 +1,24 @@
+@import '../mixins.scss';
+
+* {
+    @include default-settings;
+}
+
+.notes-container {
+    @include default-wrapper-settings;
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    text-align: center;
+    .note-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid lightgrey;
+        padding-bottom: 2px;
+        .input-buttons {
+            display: flex;
+            gap: 1vw;
+        }
+    }
+}

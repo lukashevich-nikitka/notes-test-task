@@ -5,5 +5,5 @@
 }
 
 .input-wrapper {
-    @include default-wrapper-settings;
+    @include default-wrapper-settings();
 }

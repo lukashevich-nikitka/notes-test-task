@@ -27,7 +27,7 @@ router.delete("/delete/:id", async (req, res) => {
 
 router.put("/edit/:id", async (req, res) => {
   const idx = db.findIndex((el) => el.id === req.params.id);
-  db[idx].note = req.body;
+  db[idx].note = req.body.note;
   fs.writeFile("notedb.json", JSON.stringify(db), function (err) {
     if (err) throw err;
   });

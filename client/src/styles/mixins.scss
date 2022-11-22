@@ -4,9 +4,9 @@
         box-sizing: border-box;
 }
 
-@mixin  default-wrapper-settings { 
+@mixin  default-wrapper-settings($margin: 5vw) { 
         font-family: 'Roboto', sans-serif;
         width: 50vw;
         height: fit-content;
-        margin: 5vw auto;
+        margin: $margin auto;
 }

@@ -6,11 +6,12 @@ import notesThunks from '../store/structure/thunks';
 import '../styles/components/notes.scss';
 
 function Note(props) {
-  const { id, note, index } = props;
-  const { deleteNote, editNote } = notesThunks;
+  const {
+    id, note, index, switchForm,
+  } = props;
+  const { deleteNote } = notesThunks;
   const dispatch = useDispatch();
   const removeNote = () => dispatch(deleteNote(id));
-  const redactNote = () => dispatch(editNote(note));
   return (
     <div className="note-wrapper" key={id}>
       <span>{`${index}. ${note}`}</span>
@@ -27,7 +28,7 @@ function Note(props) {
           type="submit"
           variant="contained"
           size="small"
-          onClick={redactNote}
+          onClick={switchForm}
         >
           <Edit />
         </Button>

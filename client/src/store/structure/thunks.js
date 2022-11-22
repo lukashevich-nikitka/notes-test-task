@@ -17,7 +17,7 @@ const deleteNote = createAsyncThunk('delete', async (id) => {
 });
 
 const editNote = createAsyncThunk('edit', async (data) => {
-  const response = await axios.put(`http://localhost:5000/api/notes/edit/${data.id}`, data.note);
+  const response = await axios.put(`http://localhost:5000/api/notes/edit/${data.id}`, { note: data.note });
   return response.data;
 });
 

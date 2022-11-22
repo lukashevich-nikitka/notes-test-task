@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Note from './note';
+import NoteController from './note_controller';
 
 function NotesList() {
   const notesList = useSelector((state) => state.notesList);
   return (
     <div className="notes-container">
-      {[...notesList].map((el, index) => (
-        <Note
+      {notesList.map((el, index) => (
+        <NoteController
           note={el.note}
           id={el.id}
           index={index + 1}

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import notesThunks from './store/structure/thunks';
 import NoteInput from './components/note_input';
-import Notes from './components/notes';
+import NotesList from './components/notes_list';
 import './styles/App.scss';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
       <main>
         <div className="main-container">
           <NoteInput />
-          <Notes />
+          <NotesList />
         </div>
       </main>
       <footer>

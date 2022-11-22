@@ -7,7 +7,7 @@ const {
 } = notesThunks;
 
 const initialState = {
-  notesList: [{ id: 12345, note: 'Go shopping' }],
+  notesList: [],
 };
 
 const notesReducers = createReducer(initialState, {

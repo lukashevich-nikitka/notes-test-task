@@ -3,7 +3,9 @@ import Note from './note';
 import EditNote from './edit_note';
 
 function NoteController(props) {
-  const { note, id, index } = props;
+  const {
+    note, id, index, tags,
+  } = props;
   const [edition, setEdition] = useState(false);
   const editSwitch = () => {
     setEdition(true);
@@ -17,7 +19,7 @@ function NoteController(props) {
         switchForm={noteSwitch}
         note={note}
         id={id}
-        index={index + 1}
+        index={index}
       />
     );
   }
@@ -27,6 +29,7 @@ function NoteController(props) {
       note={note}
       id={id}
       index={index + 1}
+      tags={tags}
     />
   );
 }

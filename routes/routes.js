@@ -10,7 +10,20 @@ router.get("/list", async (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
-  const upgradeDB = [{ ...req.body, id: uniqid() }, ...db];
+  const tags = [];
+  const wordsArray = req.body.note.split(" ");
+  wordsArray
+    .forEach((el, index) => {
+      if (el[0] === "#") {
+        tags.push({ id: uniqid(), tag: el.replace(/[\s.,:;]/g, '') });
+        wordsArray[index] = el.slice(1);
+      }
+    });
+  const note = wordsArray.join(" ");
+  const upgradeDB = [
+    { note, tags, id: uniqid() },
+    ...db,
+  ];
   fs.writeFile("notedb.json", JSON.stringify(upgradeDB), function (err) {
     if (err) throw err;
   });
@@ -27,7 +40,17 @@ router.delete("/delete/:id", async (req, res) => {
 
 router.put("/edit/:id", async (req, res) => {
   const idx = db.findIndex((el) => el.id === req.params.id);
-  db[idx].note = req.body.note;
+  const wordsArray = req.body.note.split(" ");
+  const tags = [];
+  wordsArray
+    .forEach((el, index) => {
+      if (el[0] === "#") {
+        db[idx].tags.push({ id: uniqid(), tag: el.replace(/[\s.,:;]/g, '') });
+        wordsArray[index] = el.slice(1);
+      }
+    });
+  const note = wordsArray.join(" ");
+  db[idx].note = note;
   fs.writeFile("notedb.json", JSON.stringify(db), function (err) {
     if (err) throw err;
   });

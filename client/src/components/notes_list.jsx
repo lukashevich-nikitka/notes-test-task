@@ -11,6 +11,7 @@ function NotesList() {
           note={el.note}
           id={el.id}
           index={index + 1}
+          tags={el.tags}
         />
       ))}
     </div>

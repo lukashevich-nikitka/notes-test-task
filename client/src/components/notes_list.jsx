@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import NoteController from './note_controller';
 
 function NotesList() {
-  const notesList = useSelector((state) => state.notesList);
+  const notesList = useSelector((state) => state.currentNotesList);
   return (
     <div className="notes-container">
       {notesList.map((el, index) => (

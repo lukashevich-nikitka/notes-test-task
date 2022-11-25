@@ -11,7 +11,7 @@ function EditNote(props) {
     switchForm, id, note, index,
   } = props;
   const { editNote } = notesThunks;
-  const tags = useSelector((state) => state.notesList[index - 1].tags);
+  const tags = useSelector((state) => state.fullNoteList[index - 1].tags);
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {

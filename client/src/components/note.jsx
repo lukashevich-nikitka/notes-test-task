@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { Button } from '@mui/material';
 import { DeleteForever, Edit } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import notesThunks from '../store/structure/thunks';
 import '../styles/components/notes.scss';
+import filter from '../store/structure/actions';
 
 function Note(props) {
   const {
@@ -12,6 +15,7 @@ function Note(props) {
   const { deleteNote } = notesThunks;
   const dispatch = useDispatch();
   const removeNote = () => dispatch(deleteNote(id));
+  const filterByTagName = (tag) => dispatch(filter(tag));
   return (
     <div>
       <div className="note-wrapper">
@@ -37,7 +41,7 @@ function Note(props) {
       </div>
       <div className="tags-wrapper">
         {tags.map((el) => (
-          <span key={el.id}>{el.tag}</span>
+          <span key={el.id} onClick={() => filterByTagName(el.tag)}>{el.tag}</span>
         ))}
       </div>
     </div>

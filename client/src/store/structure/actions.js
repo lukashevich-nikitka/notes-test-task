@@ -2,4 +2,11 @@ import { createAction } from '@reduxjs/toolkit';
 
 const filter = createAction('filter');
 
-export default filter;
+const trigerLightTags = createAction('trigerLighTags');
+
+const appActions = {
+  filter,
+  trigerLightTags,
+};
+
+export default appActions;

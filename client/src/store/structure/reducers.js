@@ -2,15 +2,18 @@
 /* eslint-disable no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
 import notesThunks from './thunks';
-import filter from './actions';
+import appActions from './actions';
 
 const {
   getNotesList, addNote, deleteNote, editNote,
 } = notesThunks;
 
+const { filter, trigerLightTags } = appActions;
+
 const initialState = {
   currentNotesList: [],
   fullNoteList: [],
+  trigerLightTags: [],
 };
 
 const notesReducers = createReducer(initialState, {
@@ -39,6 +42,9 @@ const notesReducers = createReducer(initialState, {
     };
     const notesList = state.fullNoteList.filter(filterCB);
     state.currentNotesList = notesList;
+  },
+  [trigerLightTags]: (state, action) => {
+    state.trigerLightTags = action.payload;
   },
 });
 

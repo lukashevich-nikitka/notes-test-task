@@ -41,15 +41,13 @@ router.delete("/delete/:id", async (req, res) => {
 router.put("/edit/:id", async (req, res) => {
   const idx = db.findIndex((el) => el.id === req.params.id);
   const wordsArray = req.body.note.split(" ");
-  const tags = [];
   wordsArray
-    .forEach((el, index) => {
-      if (el[0] === "#") {
+    .forEach((el) => {
+      if (el[0] === "#" && db[idx].tags.every((element) => element.tag !== el)) {
         db[idx].tags.push({ id: uniqid(), tag: el.replace(/[\s.,:;]/g, '') });
-        wordsArray[index] = el.slice(1);
       }
     });
-  const note = wordsArray.join(" ");
+  const note = wordsArray.join(" ").replace(/#/g, '');
   db[idx].note = note;
   fs.writeFile("notedb.json", JSON.stringify(db), function (err) {
     if (err) throw err;

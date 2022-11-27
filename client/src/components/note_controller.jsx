@@ -28,7 +28,7 @@ function NoteController(props) {
       switchForm={editSwitch}
       note={note}
       id={id}
-      index={index + 1}
+      index={index}
       tags={tags}
     />
   );

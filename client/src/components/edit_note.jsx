@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { TextField, InputAdornment, Button } from '@mui/material';
 import { Notes, Send } from '@mui/icons-material';
 import notesThunks from '../store/structure/thunks';
 import '../styles/components/edit_note.scss';
+import appActions from '../store/structure/actions';
 
 function EditNote(props) {
   const {
     switchForm, id, note, index,
   } = props;
+  const { trigerLightTags } = appActions;
   const { editNote } = notesThunks;
   const tags = useSelector((state) => state.fullNoteList[index - 1].tags);
   const dispatch = useDispatch();
+  useEffect(() => {
+    const triggerTags = [];
+    tags.forEach((el) => triggerTags.push(el.tag.slice(1)));
+    dispatch(trigerLightTags(triggerTags));
+  }, []);
+  useEffect(() => function triggerTagsCleaner() {
+    dispatch(trigerLightTags([]));
+  });
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     dispatch(editNote({ ...data, id }));

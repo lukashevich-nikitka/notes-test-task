@@ -3,23 +3,24 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { DeleteForever, Edit } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../types/redux_hooks';
 import notesThunks from '../store/structure/thunks';
 import '../styles/components/notes.scss';
 import appActions from '../store/structure/actions';
+import { INoteProps } from '../types/interfaces';
 
-function Note(props) {
+const Note: React.FC<INoteProps> = function (props) {
   const {
     id, note, index, switchForm, tags,
   } = props;
-  const triggerTags = useSelector((state) => state.trigerLightTags);
+  const triggerTags: Array<string> = useAppSelector((state) => state.trigerLightTags);
   const { filter } = appActions;
   const { deleteNote } = notesThunks;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const removeNote = () => dispatch(deleteNote(id));
-  const filterByTagName = (tag) => dispatch(filter(tag));
+  const filterByTagName = (tag: string) => dispatch(filter(tag));
   const tagsContain = function () {
-    return note.split(' ').every((el) => triggerTags.includes(el));
+    return note.split(' ').every((el: string) => triggerTags.includes(el));
   };
   return (
     <div>
@@ -50,12 +51,12 @@ function Note(props) {
         </div>
       </div>
       <div className="tags-wrapper">
-        {tags.map((el) => (
+        {tags!.map((el) => (
           <span key={el.id} onClick={() => filterByTagName(el.tag)}>{el.tag}</span>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Note;

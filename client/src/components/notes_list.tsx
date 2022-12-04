@@ -1,12 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { INote } from '../types/interfaces';
+import { useAppSelector } from '../types/redux_hooks';
 import NoteController from './note_controller';
 
-function NotesList() {
-  const notesList = useSelector((state) => state.currentNotesList);
+const NotesList: React.FC = function () {
+  const notesList: Array<INote> = useAppSelector((state) => state.currentNotesList);
   return (
     <div className="notes-container">
-      {notesList.map((el, index) => (
+      {notesList.map((el: INote, index: number) => (
         <NoteController
           note={el.note}
           id={el.id}
@@ -16,6 +17,6 @@ function NotesList() {
       ))}
     </div>
   );
-}
+};
 
 export default NotesList;

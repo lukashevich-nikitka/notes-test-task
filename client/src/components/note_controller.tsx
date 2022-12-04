@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Note from './note';
 import EditNote from './edit_note';
+import { INoteProps } from '../types/interfaces';
 
-function NoteController(props) {
+const NoteController: React.FC<INoteProps> = function (props) {
   const {
     note, id, index, tags,
   } = props;
@@ -32,6 +33,6 @@ function NoteController(props) {
       tags={tags}
     />
   );
-}
+};
 
 export default NoteController;

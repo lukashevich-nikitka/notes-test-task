@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import notesThunks from './store/structure/thunks';
 import NoteInput from './components/note_input';
 import NotesList from './components/notes_list';
+import { useAppDispatch } from './types/redux_hooks';
 import './styles/App.scss';
 
-function App() {
+const App: React.FC = function () {
   const { getNotesList } = notesThunks;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getNotesList());
   });
@@ -33,6 +33,6 @@ function App() {
       </footer>
     </>
   );
-}
+};
 
 export default App;

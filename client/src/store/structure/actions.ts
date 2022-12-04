@@ -1,8 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const filter = createAction('filter');
+const filter = createAction<string>('filter');
 
-const trigerLightTags = createAction('trigerLighTags');
+const trigerLightTags = createAction<Array<string>>('trigerLighTags');
 
 const appActions = {
   filter,

@@ -1,8 +1,9 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, PayloadAction } from '@reduxjs/toolkit';
 import notesThunks from './thunks';
 import appActions from './actions';
+import { INote } from '../../types/interfaces';
 
 const {
   getNotesList, addNote, deleteNote, editNote,
@@ -10,40 +11,47 @@ const {
 
 const { filter, trigerLightTags } = appActions;
 
-const initialState = {
+const initialState: {
+  currentNotesList: Array<INote>;
+  fullNoteList: Array<INote>;
+  trigerLightTags: Array<string>;
+} = {
   currentNotesList: [],
   fullNoteList: [],
   trigerLightTags: [],
 };
 
 const notesReducers = createReducer(initialState, {
-  [getNotesList.fulfilled]: (state, action) => {
+  [getNotesList.fulfilled.type]: (
+    state,
+    action: PayloadAction<Array<INote>>,
+  ) => {
     state.currentNotesList = action.payload;
     state.fullNoteList = action.payload;
   },
-  [addNote.fulfilled]: (state, action) => {
+  [addNote.fulfilled.type]: (state, action: PayloadAction<Array<INote>>) => {
     state.fullNoteList = action.payload;
     state.currentNotesList = state.fullNoteList;
   },
-  [deleteNote.fulfilled]: (state, action) => {
+  [deleteNote.fulfilled.type]: (state, action: PayloadAction<Array<INote>>) => {
     state.fullNoteList = action.payload;
     state.currentNotesList = state.fullNoteList;
   },
-  [editNote.fulfilled]: (state, action) => {
+  [editNote.fulfilled.type]: (state, action: PayloadAction<Array<INote>>) => {
     state.fullNoteList = action.payload;
     state.currentNotesList = state.fullNoteList;
   },
-  [filter]: (state, action) => {
-    const filterCB = function (el) {
-      if ((el.tags).some((elem) => elem.tag === action.payload)) {
+  [filter.type]: (state, action: PayloadAction<string>) => {
+    const filterCB: (el: INote) => boolean = function (el) {
+      if (el.tags.some((elem) => elem.tag === action.payload)) {
         return true;
       }
       return false;
     };
-    const notesList = state.fullNoteList.filter(filterCB);
+    const notesList: Array<INote> = state.fullNoteList.filter(filterCB);
     state.currentNotesList = notesList;
   },
-  [trigerLightTags]: (state, action) => {
+  [trigerLightTags.type]: (state, action: PayloadAction<Array<string>>) => {
     state.trigerLightTags = action.payload;
   },
 });
